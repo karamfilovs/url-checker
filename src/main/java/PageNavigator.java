@@ -28,20 +28,20 @@ public class PageNavigator {
         driver.manage().deleteAllCookies();
     }
 
-   public static List<String> getAllPageLinks(){
-       System.out.println("Scrapping all hyperlinks from the current page");
-       List<WebElement> links = driver.findElements(By.tagName("a"));
-       links.addAll(driver.findElements(By.tagName("img")));
-       Set<WebElement> pageLinks = links.stream().filter(link -> link.getAttribute("href") != null).collect(Collectors.toSet());
-       List<String> hyperlinks = new ArrayList<>();
-       pageLinks.forEach(pageLink -> hyperlinks.add(pageLink.getAttribute("href")));
-       System.out.println("Links found:" + hyperlinks.size());
-       return hyperlinks;
-   }
+    public static List<String> getAllPageLinks() {
+        System.out.println("Scrapping all hyperlinks from the current page");
+        List<WebElement> links = driver.findElements(By.tagName("a"));
+        links.addAll(driver.findElements(By.tagName("img")));
+        Set<WebElement> pageLinks = links.stream().filter(link -> link.getAttribute("href") != null).collect(Collectors.toSet());
+        List<String> hyperlinks = new ArrayList<>();
+        pageLinks.forEach(pageLink -> hyperlinks.add(pageLink.getAttribute("href")));
+        System.out.println("Links found:" + hyperlinks.size());
+        return hyperlinks;
+    }
 
-   public static void browserQuit(){
+    public static void browserQuit() {
         driver.quit();
-   }
+    }
 
 
 }

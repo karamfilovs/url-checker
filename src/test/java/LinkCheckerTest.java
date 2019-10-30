@@ -1,6 +1,3 @@
-import net.bytebuddy.asm.Advice;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
@@ -8,8 +5,10 @@ public class LinkCheckerTest extends BaseTest {
 
     @ParameterizedTest
     @EnumSource(Locale.class)
-    public void checkUSLinks(Locale locale) {
+    public void checkUSLinks(Locale locale) throws Exception {
         PageNavigator.gotoPage("https://pragmatic.bg");
+        HTTPClient myClient = new HTTPClient();
+        myClient.validateUrl(PageNavigator.getAllPageLinks());
         PageNavigator
                 .getAllPageLinks()
                 .forEach(link -> {

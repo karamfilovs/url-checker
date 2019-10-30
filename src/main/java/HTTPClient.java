@@ -1,11 +1,5 @@
-import org.openqa.selenium.WebElement;
-
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,23 +45,5 @@ public class HTTPClient {
     }
 
 
-    public static void main(String[] args) {
-        PageNavigator.startBrowser();
-        PageNavigator.gotoPage("https://pragmatic.bg");
-        List<String> pageLinks = PageNavigator.getAllPageLinks();
-        try {
-            HTTPClient myClient = new HTTPClient();
-            myClient.validateUrl(pageLinks);
-            System.out.println("Valid URLS that have successfully connected :");
-            System.out.println(myClient.succeededURLS);
-            System.out.println("\n--------------\n\n");
-            System.out.println("Broken URLS that did not successfully connect :");
-            System.out.println(myClient.failedURLS);
-        } catch (Exception e) {
-            System.out.print(e.getMessage());
-        }
-
-        PageNavigator.browserQuit();
-    }
 }
 
