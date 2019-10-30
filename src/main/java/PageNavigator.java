@@ -1,3 +1,4 @@
+import com.google.common.collect.Sets;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,7 +31,7 @@ public class PageNavigator {
 
     public static List<String> getAllPageLinks() {
         System.out.println("Scrapping all hyperlinks from the current page");
-        List<WebElement> links = driver.findElements(By.tagName("a"));
+        Set<WebElement> links = Sets.newHashSet(driver.findElements(By.tagName("a")));
         links.addAll(driver.findElements(By.tagName("img")));
         Set<WebElement> pageLinks = links.stream().filter(link -> link.getAttribute("href") != null).collect(Collectors.toSet());
         List<String> hyperlinks = new ArrayList<>();

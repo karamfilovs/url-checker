@@ -12,8 +12,8 @@ public class LinkCheckerTest extends BaseTest {
         PageNavigator
                 .getAllPageLinks()
                 .forEach(link -> {
-                    if (!link.contains(Locale.US.getLocale())) {
-                        System.out.println("Does not contain specified locale:" + locale.US.getLocale());
+                    if (!link.contains(locale.getLocale())) {
+                        System.out.println("Does not contain specified locale:" + locale.getLocale());
                         System.out.println(link);
                         //Assertions.fail("bad link");
                     }
