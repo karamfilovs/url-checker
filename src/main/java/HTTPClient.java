@@ -9,6 +9,14 @@ public class HTTPClient {
     private String succeededURLS = "";
     private String incorrectURLS = "";
 
+    public String getFailedURLS() {
+        return failedURLS;
+    }
+
+    public String getSucceededURLS() {
+        return succeededURLS;
+    }
+
 
     private boolean verifyUrl(String url) {
         String urlRegex = "^(http|https)://[-a-zA-Z0-9+&@#/%?=~_|,!:.;]*[-a-zA-Z0-9+@#/%=&_|]";
@@ -20,7 +28,6 @@ public class HTTPClient {
             return false;
         }
     }
-
 
     public void validateUrl(List<String> urls) throws Exception {
         urls.forEach((String url) -> {

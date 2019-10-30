@@ -1,7 +1,10 @@
 public enum URLStatus {
-    HTTP_OK(200, "OK", "SUCCESS"), NO_CONTENT(204, "No Content", "SUCCESS"),
-    MOVED_PERMANENTLY(301, "Moved Permanently", "SUCCESS"), NOT_MODIFIED(304, "Not modified", "SUCCESS"),
-    USE_PROXY(305, "Use Proxy", "SUCCESS"), INTERNAL_SERVER_ERROR(500, "Internal Server Error", "ERROR"),
+    HTTP_OK(200, "OK", "SUCCESS"),
+    NO_CONTENT(204, "No Content", "SUCCESS"),
+    MOVED_PERMANENTLY(301, "Moved Permanently", "SUCCESS"),
+    NOT_MODIFIED(304, "Not modified", "SUCCESS"),
+    USE_PROXY(305, "Use Proxy", "SUCCESS"),
+    INTERNAL_SERVER_ERROR(500, "Internal Server Error", "ERROR"),
     NOT_FOUND(404, "Not Found", "ERROR");
 
     private int statusCode;
