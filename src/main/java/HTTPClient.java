@@ -31,7 +31,6 @@ public class HTTPClient {
     public void validateUrl(List<String> urls) throws Exception {
         urls.forEach((String url) -> {
             if (verifyUrl(url)) {
-                System.out.println("Checking URL:" + url);
                 try {
                     URL myURL = new URL(url);
                     HttpURLConnection myConnection = (HttpURLConnection) myURL.openConnection();
@@ -39,7 +38,7 @@ public class HTTPClient {
                         succeededURLS = succeededURLS + "\n" + url + "****** Status message is : "
                                 + URLStatus.getStatusMessageForStatusCode(myConnection.getResponseCode());
                     } else {
-                        failedURLS = failedURLS + "\n" + url + "****** Status message is : "
+                        failedURLS = failedURLS + "\n" + url + " ****** Status message is : "
                                 + URLStatus.getStatusMessageForStatusCode(myConnection.getResponseCode());
                     }
                 } catch (Exception e) {

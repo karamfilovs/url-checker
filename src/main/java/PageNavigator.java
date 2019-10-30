@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,7 @@ public class PageNavigator {
 
 
     public static void gotoPage(String page) {
+        System.out.println("Navigating to page:" + page);
         driver.navigate().to(page);
     }
 
@@ -30,7 +32,7 @@ public class PageNavigator {
        System.out.println("Scrapping all hyperlinks from the current page");
        List<WebElement> links = driver.findElements(By.tagName("a"));
        links.addAll(driver.findElements(By.tagName("img")));
-       List<WebElement> pageLinks = links.stream().filter(link -> link.getAttribute("href") != null).collect(Collectors.toList());
+       Set<WebElement> pageLinks = links.stream().filter(link -> link.getAttribute("href") != null).collect(Collectors.toSet());
        List<String> hyperlinks = new ArrayList<>();
        pageLinks.forEach(pageLink -> hyperlinks.add(pageLink.getAttribute("href")));
        System.out.println("Links found:" + hyperlinks.size());
