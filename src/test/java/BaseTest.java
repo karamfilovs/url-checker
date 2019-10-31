@@ -4,12 +4,12 @@ import org.junit.jupiter.api.BeforeEach;
 public class BaseTest {
 
     @BeforeEach
-    public void beforeEach(){
+    public void beforeEach() {
         PageNavigator.startBrowser();
     }
 
     @AfterEach
-    public void afterEach(){
+    public void afterEach() {
         PageNavigator.browserQuit();
     }
 }
