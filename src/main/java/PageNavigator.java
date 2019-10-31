@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class PageNavigator {
     private static WebDriver driver;
-    private static final String WINDOWS_CHROME_DRIVER_PATH = "src\\main\\resources\\chromedriver.exe";
+    private static final String CHROME_DRIVER_PATH = "src/main/resources/chromedriver.exe";
 
 
     public static void gotoPage(String page) {
@@ -22,7 +22,7 @@ public class PageNavigator {
     }
 
     public static void startBrowser() {
-        System.setProperty("webdriver.chrome.driver", WINDOWS_CHROME_DRIVER_PATH);
+        System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
