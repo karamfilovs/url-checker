@@ -22,11 +22,11 @@ public class PageNavigator {
     private static final Logger LOGGER = LoggerFactory.getLogger(PageNavigator.class);
     private static WebDriver driver;
     private static final String LINUX_CHROME_DRIVER_PATH = "src/main/resources/linux-chromedriver-78";
-    private static final String WINDOWS_CHROME_DRIVER_PATH = "src/main/resources/chromedriver.exe";
+    private static final String WINDOWS_CHROME_DRIVER_PATH = "src/main/resources/windows-chromedriver-78.exe";
 
 
     public static void gotoPage(String page) {
-        System.out.println("Navigating to page:" + page);
+        LOGGER.info("Navigating to page: " + page);
         driver.navigate().to(page);
     }
 
@@ -44,16 +44,16 @@ public class PageNavigator {
 
     public static void acceptCookies() {
         if(isPresent(By.xpath("//iframe[contains(@id,'pop-frame')]"))) {
-            System.out.println("Entering to accept the cookies.");
+            LOGGER.info("Entering to accept the cookies.");
             driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@id,'pop-frame')]")));
             driver.findElement(By.cssSelector("div.pdynamicbutton a.submit")).click();
             Wait<WebDriver> wait = new WebDriverWait(driver, 60);
-            System.out.println("Waiting for Close button to appear in order to click it.");
+            LOGGER.info("Waiting for Close button to appear in order to click it.");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".pdynamicbutton a.close"))).click();
-            System.out.println("Clicking the close button after the cookies are accepted.");
+            LOGGER.info("Clicking the close button after the cookies are accepted.");
             driver.switchTo().defaultContent();
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//iframe[contains(@id,'pop-frame')]")));
-            System.out.println("Cookies accepted!");
+            LOGGER.info("Cookies accepted!");
         }
     }
 
@@ -65,7 +65,7 @@ public class PageNavigator {
                 if (!localScreenshots.exists() || !localScreenshots.isDirectory()) {
                     localScreenshots.mkdirs();
                 }
-                File screenshot = new File(localScreenshots, url.replace("https://", "tls") + "_" + new Date().getTime() +".png");
+                File screenshot = new File(localScreenshots, url.replace("https://", "tls").replace("/", "_").replace(".", "_") + "_" + new Date().getTime() +".png");
                 FileUtils.copyFile(screenshotTakingDriver.getScreenshotAs(OutputType.FILE), screenshot);
                 LOGGER.info("Screenshot for class={} method={} saved in: {}", screenshot.getAbsolutePath());
             } catch (Exception e1) {

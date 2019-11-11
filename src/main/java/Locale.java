@@ -1,13 +1,14 @@
 public enum Locale {
-    EN_DE("en_de"),
-    DE_DE("de_de"),
-    DE_AT("de_at"),
-    EN_AT("en_at"),
-    EN_DK("en_dk"),
-    FR_FR("fr_fr"),
-    EN_FR("en_fr"),
-    IT_IT("it_it"),
-    EN_IT("en_it");
+    EN_US("en-us"),
+    EN_DE("en-de"),
+    DE_DE("de-de"),
+    DE_AT("de-at"),
+    EN_AT("en-at"),
+    EN_DK("en-dk"),
+    FR_FR("fr-fr"),
+    EN_FR("en-fr"),
+    IT_IT("it-it"),
+    EN_IT("en-it");
 
     Locale(String locale) {
         this.locale = locale;

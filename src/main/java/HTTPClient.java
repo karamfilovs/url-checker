@@ -22,27 +22,28 @@ public class HTTPClient {
         }
     }
 
-    public void validateUrl(List<String> urls) {
-        System.out.println("Checking urls");
-        urls.forEach((String url) -> {
-            if (verifyUrl(url)) {
-                try {
-                    PageNavigator.gotoPage(url);
-                    URL myURL = new URL(url);
-                    HttpURLConnection myConnection = (HttpURLConnection) myURL.openConnection();
-                    if (myConnection.getResponseCode() == 200) {
-                        LOGGER.info("\n" + url + "****** Status message is : " + myConnection.getResponseCode());
-                    } else {
-                        LOGGER.debug("\n" + url + " ****** Status message is : " + myConnection.getResponseCode());
+    public int validateUrl(String url) {
+        int statusCode = 0;
+        if (verifyUrl(url)) {
+            try {
+                PageNavigator.gotoPage(url);
+                URL myURL = new URL(url);
+                HttpURLConnection myConnection = (HttpURLConnection) myURL.openConnection();
+                statusCode = myConnection.getResponseCode();
+                if (statusCode == 200) {
+                    LOGGER.info(url + " - Status message is: " + statusCode);
+                } else {
+                    LOGGER.debug(url + " - Status message is: " + statusCode);
 
-                    }
-                } catch (Exception e) {
-                    LOGGER.error("\n" + "For url - " + url + "" + e.getMessage());
                 }
-            } else {
-                System.out.println("\n" + "Incorrect url:" + url);
+            } catch (Exception e) {
+                LOGGER.error("\n" + "For url - " + url + "" + e.getMessage());
             }
-        });
+        } else {
+            LOGGER.error("Incorrect url: " + url);
+        }
+        return statusCode;
+
     }
 
 

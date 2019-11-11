@@ -1,3 +1,6 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -5,6 +8,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileReader {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileReader.class);
+
 
     public static List<String> retrieveLinksFromFile(String filePath) {
         List<String> links = new ArrayList<>();
@@ -22,7 +27,7 @@ public class FileReader {
             links.add(sc.next());
 
         }
-        System.out.println("Links found in file:" + links.size());
+        LOGGER.info("Links found in file: " + links.size());
         return links;
     }
 
