@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-public class LinkOnlyChecker {
+public class LinkOnlyChecker extends BaseTest {
 
     @Test
     public void linkCheck(){
