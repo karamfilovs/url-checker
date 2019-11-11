@@ -1,15 +1,17 @@
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 public class BaseTest {
 
-    @BeforeEach
-    public void beforeEach(){
+    @BeforeAll
+    public static void beforeAll() {
         PageNavigator.startBrowser();
     }
 
-    @AfterEach
-    public void afterEach(){
+    @AfterAll
+    public static void afterAll() {
         PageNavigator.browserQuit();
     }
 }

@@ -11,11 +11,6 @@ public class LinkCheckerTest extends BaseTest {
         PageNavigator.gotoPage("https://pragmatic-qa.com");
         HTTPClient myClient = new HTTPClient();
         myClient.validateUrl(PageNavigator.getAllPageLinks());
-        System.out.println("Valid URLS that have successfully connected :");
-        System.out.println(myClient.getSucceededURLS());
-        System.out.println("\n--------------\n\n");
-        System.out.println(ANSI_RED + "Broken URLS that did not successfully connect :" + ANSI_RESET);
-        System.out.println(myClient.getFailedURLS());
         PageNavigator
                 .getAllPageLinks()
                 .forEach(link -> {

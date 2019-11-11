@@ -22,6 +22,8 @@ public class FileReader {
             links.add(sc.next());
 
         }
+        System.out.println("Links found in file:" + links.size());
         return links;
     }
+
 }
