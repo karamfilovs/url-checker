@@ -22,7 +22,7 @@ public class HTTPClient {
         }
     }
 
-    public void validateUrl(List<String> urls) throws Exception {
+    public void validateUrl(List<String> urls) {
         System.out.println("Checking urls");
         urls.forEach((String url) -> {
             if (verifyUrl(url)) {
@@ -30,16 +30,14 @@ public class HTTPClient {
                     PageNavigator.gotoPage(url);
                     URL myURL = new URL(url);
                     HttpURLConnection myConnection = (HttpURLConnection) myURL.openConnection();
-                    if (myConnection.getResponseCode() == URLStatus.HTTP_OK.getStatusCode()) {
-                        LOGGER.info("\n" + url + "****** Status message is : "
-                                + URLStatus.getStatusMessageForStatusCode(myConnection.getResponseCode()));
+                    if (myConnection.getResponseCode() == 200) {
+                        LOGGER.info("\n" + url + "****** Status message is : " + myConnection.getResponseCode());
                     } else {
-                        LOGGER.debug(("\n" + url + " ****** Status message is : "
-                                + URLStatus.getStatusMessageForStatusCode(myConnection.getResponseCode())));
+                        LOGGER.debug("\n" + url + " ****** Status message is : " + myConnection.getResponseCode());
 
                     }
                 } catch (Exception e) {
-                    LOGGER.error("\n" + "For url- " + url + "" + e.getMessage());
+                    LOGGER.error("\n" + "For url - " + url + "" + e.getMessage());
                 }
             } else {
                 System.out.println("\n" + "Incorrect url:" + url);
