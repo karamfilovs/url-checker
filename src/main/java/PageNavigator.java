@@ -1,9 +1,11 @@
 import com.google.common.collect.Sets;
+import com.sun.deploy.util.SystemUtils;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.plugin2.util.SystemUtil;
 
 
 import java.io.File;
@@ -19,7 +21,8 @@ import java.util.stream.Collectors;
 public class PageNavigator {
     private static final Logger LOGGER = LoggerFactory.getLogger(PageNavigator.class);
     private static WebDriver driver;
-    private static final String WINDOWS_CHROME_DRIVER_PATH = "src/main/resources/linux-chromedriver-78";
+    private static final String LINUX_CHROME_DRIVER_PATH = "src/main/resources/linux-chromedriver-78";
+    private static final String WINDWOS_CHROME_DRIVER_PATH = "src/main/resources/chromedriver.exe";
 
 
     public static void gotoPage(String page) {
@@ -27,10 +30,9 @@ public class PageNavigator {
         driver.navigate().to(page);
     }
 
-    public static void acceptCookies() throws InterruptedException {
+    public static void acceptCookies() {
         driver.switchTo().frame(1);
         driver.findElement(By.xpath("//a[@class='submit']")).click();
-        driver.wait(1000);
         driver.switchTo().parentFrame();
     }
 
@@ -56,7 +58,7 @@ public class PageNavigator {
 
 
     public static void startBrowser() {
-        System.setProperty("webdriver.chrome.driver", WINDOWS_CHROME_DRIVER_PATH);
+        System.setProperty("webdriver.chrome.driver", WINDWOS_CHROME_DRIVER_PATH);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

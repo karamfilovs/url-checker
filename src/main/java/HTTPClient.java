@@ -1,3 +1,6 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -5,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HTTPClient {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HTTPClient.class);
 
 
     private boolean verifyUrl(String url) {
@@ -27,28 +31,19 @@ public class HTTPClient {
                     URL myURL = new URL(url);
                     HttpURLConnection myConnection = (HttpURLConnection) myURL.openConnection();
                     if (myConnection.getResponseCode() == URLStatus.HTTP_OK.getStatusCode()) {
-                        System.out.println("\n" + url + "****** Status message is : "
+                        LOGGER.info("\n" + url + "****** Status message is : "
                                 + URLStatus.getStatusMessageForStatusCode(myConnection.getResponseCode()));
                     } else {
-                        System.out.println(("\n" + url + " ****** Status message is : "
+                        LOGGER.debug(("\n" + url + " ****** Status message is : "
                                 + URLStatus.getStatusMessageForStatusCode(myConnection.getResponseCode())));
 
                     }
                 } catch (Exception e) {
-                    System.out.print("\n" + "For url- " + url + "" + e.getMessage());
+                    LOGGER.error("\n" + "For url- " + url + "" + e.getMessage());
                 }
             } else {
                 System.out.println("\n" + "Incorrect url:" + url);
             }
-        });
-    }
-
-    public void openURLAndCapture(List<String> urls) throws Exception {
-        urls.forEach(url -> {
-            PageNavigator.gotoPage(url);
-            PageNavigator.takeScreenshot(url);
-
-
         });
     }
 
