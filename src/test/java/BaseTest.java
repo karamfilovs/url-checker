@@ -7,6 +7,7 @@ public class BaseTest {
 
     @BeforeAll
     public static void beforeAll() {
+        System.setProperty("log.name", "wacom_link_checker");
         PageNavigator.startBrowser();
     }
 

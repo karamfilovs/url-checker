@@ -65,7 +65,7 @@ public class PageNavigator {
                 if (!localScreenshots.exists() || !localScreenshots.isDirectory()) {
                     localScreenshots.mkdirs();
                 }
-                File screenshot = new File(localScreenshots, url.replace("https://", "tls").replace("/", "_").replace(".", "_") + "_" + new Date().getTime() +".png");
+                File screenshot = new File(localScreenshots, url.replace("https://", "tls_").replace("/", "_").replace(".", "_") + "_" + new Date().getTime() +".png");
                 FileUtils.copyFile(screenshotTakingDriver.getScreenshotAs(OutputType.FILE), screenshot);
                 LOGGER.info("Screenshot for class={} method={} saved in: {}", screenshot.getAbsolutePath());
             } catch (Exception e1) {
