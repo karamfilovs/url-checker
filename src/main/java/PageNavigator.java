@@ -43,7 +43,7 @@ public class PageNavigator {
     }
 
     public static void acceptCookies() {
-        if(isPresent(By.xpath("//iframe[contains(@id,'pop-frame')]"))) {
+        if (isPresent(By.xpath("//iframe[contains(@id,'pop-frame')]"))) {
             LOGGER.info("Entering to accept the cookies.");
             driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@id,'pop-frame')]")));
             driver.findElement(By.cssSelector("div.pdynamicbutton a.submit")).click();
@@ -65,7 +65,7 @@ public class PageNavigator {
                 if (!localScreenshots.exists() || !localScreenshots.isDirectory()) {
                     localScreenshots.mkdirs();
                 }
-                File screenshot = new File(localScreenshots, url.replace("https://", "tls_").replace("/", "_").replace(".", "_") + "_" + new Date().getTime() +".png");
+                File screenshot = new File(localScreenshots, url.replace("https://", "tls_").replace("/", "_").replace(".", "_") + "_" + new Date().getTime() + ".png");
                 FileUtils.copyFile(screenshotTakingDriver.getScreenshotAs(OutputType.FILE), screenshot);
                 LOGGER.info("Screenshot for class={} method={} saved in: {}", screenshot.getAbsolutePath());
             } catch (Exception e1) {
@@ -75,7 +75,7 @@ public class PageNavigator {
             LOGGER.error("Driver '{}' can't take screenshots so skipping it.", driver.getClass());
         }
 
-}
+    }
 
 
     public static void startBrowser() {
@@ -83,6 +83,17 @@ public class PageNavigator {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    public static List<String> getAllPageLinks() {
+        System.out.println("Scrapping all hyperlinks from the current page");
+        List<WebElement> links = driver.findElements(By.tagName("a"));
+        links.addAll(driver.findElements(By.tagName("img")));
+        List<WebElement> pageLinks = links.stream().filter(link -> link.getAttribute("href") != null).collect(Collectors.toList());
+        List<String> hyperlinks = new ArrayList<>();
+        pageLinks.forEach(pageLink -> hyperlinks.add(pageLink.getAttribute("href")));
+        LOGGER.info("Links found:" + hyperlinks.size());
+        return hyperlinks;
     }
 
 

@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class LinkCheckerTest extends BaseTest {
+public class LinkCheckerTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(LinkCheckerTest.class);
 
     @ParameterizedTest
@@ -18,13 +18,12 @@ public class LinkCheckerTest extends BaseTest {
             url = url.replace("en-us", locale.getLocale());
             PageNavigator.gotoPage(url);
             PageNavigator.acceptCookies();
-            //PageNavigator.takeScreenshot(url);
+            PageNavigator.takeScreenshot(url);
             HTTPClient httpClient = new HTTPClient();
             int statusCode = httpClient.validateUrl(url);
             LOGGER.info("***********************");
             Assertions.assertTrue(statusCode <= 400, "Status code is BAD: " + statusCode);
         });
-
 
 
     }

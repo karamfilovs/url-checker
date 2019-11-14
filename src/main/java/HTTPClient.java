@@ -26,7 +26,6 @@ public class HTTPClient {
         int statusCode = 0;
         if (verifyUrl(url)) {
             try {
-                PageNavigator.gotoPage(url);
                 URL myURL = new URL(url);
                 HttpURLConnection myConnection = (HttpURLConnection) myURL.openConnection();
                 statusCode = myConnection.getResponseCode();
